@@ -56,6 +56,7 @@ spring:
             isClustered: true
             misfireThreshold: 60000
             clusterCheckinInterval: 10000
+            selectWithLockSQL: SELECT* FROM {0}LOCKS UPDLOCK WHERE LOCK_NAME = ?
           threadPool:
             class: org.quartz.simpl.SimpleThreadPool
             threadCount: 10
@@ -131,10 +132,15 @@ spring:
         connectionProperties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
       datasource:
         master:
-          url: jdbc:mysql://127.0.0.1:3306/jeecg-boot?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
-          username: root
-          password: root
-          driver-class-name: com.mysql.cj.jdbc.Driver
+#          url: jdbc:mysql://127.0.0.1:3306/jeecg-boot?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+#          username: root
+#          password: root
+#          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:sqlserver://localhost;DatabaseName=jeecg
+          username: sa
+          password: 123@abc
+          driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
           # 多数据源配置
           #multi-datasource1:
           #url: jdbc:mysql://localhost:3306/jeecg-boot2?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
